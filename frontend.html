@@ -1,0 +1,356 @@
+<html>
+	<head>
+		<title>Find Books!</title>
+		<style type="text/css">
+			h1{
+				font-weight:bold;
+				color:990033;
+			}
+		</style>
+		<script>
+			var choicevalue;
+			var click1=false;
+			var click2=false;
+			
+			function choice(ids){
+				choicevalue = document.getElementById(ids).value; 
+				//document.write(choicevalue);
+				
+			}
+			function searching(){
+				choicevalue=document.getElementById(1).value;
+				if(choicevalue=="title"){
+					chooseTitle();
+				}else if(choicevalue=="keyword"){
+					chooseKeyword();
+				//}else{
+					//alert("You must choose something!!!");
+				}
+			}
+			
+			function chooseKeyword(){
+				if(click1==false){
+				//text
+				var para = document.createElement("p");
+				var node = document.createTextNode("Please give a keyword to find a book:");
+				para.appendChild(node);
+
+				var element = document.getElementById("content");
+				element.appendChild(para);
+				
+				//textbox
+				var input = document.createElement("input");
+				input.type = "text";
+				input.id = "txtb";
+				input.className = "css-class-name"; // set the CSS class
+				var element2 = document.getElementById("content");
+				element2.appendChild(input); 
+				//keno
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				//BUTTON
+				//document.write("<br>");
+				var btn = document.createElement("BUTTON");  				// Create a <button> element
+				btn.id="btns";
+				var t = document.createTextNode("Search");       // Create a text node
+				btn.appendChild(t); 
+                               // Append the text to <button>
+				var element1 = document.getElementById("content");
+				element1.appendChild(btn); 
+	
+				//keno
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				
+				var button = document.getElementById("btns");
+				button.addEventListener("click", sendRequestKey);
+				}
+				click1=true;
+			
+			}
+			
+			function sendRequestKey(){
+				//lezanta gia keyword
+				var para = document.createElement("p");
+				var node = document.createTextNode("Results by keyword:");
+				para.appendChild(node);
+				var element = document.getElementById("content");
+				element.appendChild(para);
+				//keno
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				
+				var keywords = document.getElementById("txtb").value;
+				keywords = keywords.replace("'", "''");
+				//alert(keywords);
+				
+				xmlhttp = new XMLHttpRequest();
+				var url1 = "http://localhost/getBooksByKeyword.php?keywords="+keywords;
+				
+				xmlhttp.open("GET",url1,true);
+				
+				xmlhttp.onreadystatechange = function() {
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						//var response = xmlhttp.responseXML;
+						var result = xmlhttp.responseText;
+						//document.getElementById("content").innerHTML = xmlhttp.responseText;
+						
+						
+						var div = document.getElementById("content");
+						var resTextNode = document.createTextNode(result);
+						div.appendChild(resTextNode);
+					}
+				}
+				
+				xmlhttp.send();
+				
+				//keno
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				
+			}
+			
+			
+			function chooseTitle(){
+			if(click2==false){
+				//text
+				var para = document.createElement("p");
+				var node = document.createTextNode("Choose between this titles:");
+				para.appendChild(node);
+
+				var element = document.getElementById("content");
+				element.appendChild(para);
+				
+				//list
+				var select = document.createElement("Select");
+				var nodes = document.createTextNode(" ");
+				select.appendChild(nodes);
+				select.id="selects";
+				select.class="selection";
+				
+				var element = document.getElementById("content");
+				element.appendChild(select);
+				//option
+				var oOption = document.createElement("option");
+				oOption.innerText = " "; // Using innerText for backwards compatibility.
+				oOption.value = "1";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);var oOption = document.createElement("option");
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "XML Developer's Guide"; // Using innerText for backwards compatibility.
+				oOption.value = "XML Developer's Guide";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);var oOption = document.createElement("option");
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "Midnight Rain"; // Using innerText for backwards compatibility.
+				oOption.value = "Midnight Rain";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);var oOption = document.createElement("option");
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "Maeve Ascendant"; // Using innerText for backwards compatibility.
+				oOption.value = "Maeve Ascendant";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);var oOption = document.createElement("option");
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "Oberon's Legacy"; // Using innerText for backwards compatibility.
+				oOption.value = "Oberon's Legacy";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);var oOption = document.createElement("option");
+
+				var oOption = document.createElement("option");
+				oOption.innerText = "The Sundered Grail"; // Using innerText for backwards compatibility.
+				oOption.value = "The Sundered Grail";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "Lover Birds"; // Using innerText for backwards compatibility.
+				oOption.value = "Lover Birds";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "Splish Splash"; // Using innerText for backwards compatibility.
+				oOption.value = "Splish Splash";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "Creepy Crawlies"; // Using innerText for backwards compatibility.
+				oOption.value = "Creepy Crawlies";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "Paradox Lost"; // Using innerText for backwards compatibility.
+				oOption.value = "Paradox Lost";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "Microsoft .NET: The Programming Bible"; // Using innerText for backwards compatibility.
+				oOption.value = "Microsoft .NET: The Programming Bible";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "MSXML3: A Comprehensive Guide"; // Using innerText for backwards compatibility.
+				oOption.value = "MSXML3: A Comprehensive Guide";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);
+				
+				var oOption = document.createElement("option");
+				oOption.innerText = "Visual Studio 7: A Comprehensive Guide"; // Using innerText for backwards compatibility.
+				oOption.value = "Visual Studio 7: A Comprehensive Guide";
+				var element = document.getElementById("content");
+				select.appendChild(oOption);
+				 
+				//keno
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				//keno
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				
+				//BUTTON
+				//document.write("<br>");
+				var btn = document.createElement("BUTTON");  				// Create a <button> element
+				btn.id="btnok";
+				var t = document.createTextNode("Ok");       // Create a text node
+				btn.appendChild(t); 
+                               // Append the text to <button>
+				var element1 = document.getElementById("content");
+				element1.appendChild(btn); 
+				
+				//keno
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				
+				//eventlistener
+				var button = document.getElementById("btnok");
+				button.addEventListener("click", sendRequest);
+				//button.addEventListener("click", sendRequest);
+				//function se(){
+					//alert("HI");
+				//}
+		
+			}
+			click2=true;
+			}
+		
+		
+			function sendRequest(){
+				//lezanta gia keyword
+				var para = document.createElement("p");
+				var node = document.createTextNode("Results by title:");
+				para.appendChild(node);
+				var element = document.getElementById("content");
+				element.appendChild(para);
+				//keno
+				var para1 = document.createElement("br");
+				var node = document.createTextNode("");
+				para1.appendChild(node);
+				var element1 = document.getElementById("content");
+				element1.appendChild(para1);
+				
+				var titles = document.getElementById("selects").value;
+				titles = titles.replace("'", "''");
+				//alert(titles);
+				
+				if(titles!=1){
+					xmlhttp = new XMLHttpRequest();
+					var url = "http://localhost/getBooksByTitle.php?titles="+titles;
+					//alert(url);
+					xmlhttp.open("GET",url,true);
+					
+					xmlhttp.onreadystatechange = function() {
+						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+							//var response = xmlhttp.responseXML;
+							var result = xmlhttp.responseText;
+							//document.getElementById("content").innerHTML = xmlhttp.responseText;
+							
+							
+							var div = document.getElementById("content");
+							var resTextNode = document.createTextNode(result);
+							div.appendChild(resTextNode);
+						}
+					}
+					
+					xmlhttp.send();
+					
+					//keno
+					var para1 = document.createElement("br");
+					var node = document.createTextNode("");
+					para1.appendChild(node);
+					var element1 = document.getElementById("content");
+					element1.appendChild(para1);
+					
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<br>
+			<h1>Books search</h1>
+			<!--<form>-->
+				<br>
+				<p>Do you want to select from the title of a book or from a keyword?</p>
+				<br>
+				<select id=1 >
+				<option value='choice_nothing'></option>
+				<option value="title" >Find Book By Title</option>
+				<option value="keyword">Find Book By Keyword</option>
+				</select>
+				
+				<input type="button" style="font-weight:bold;" value=" OK " name="start"  onclick="searching();"/>
+				<br>
+				<br>
+				<div id="content"/>
+			<!--</form>-->
+			
+		</center>
+	</body>
+</html>
